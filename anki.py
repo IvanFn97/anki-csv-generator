@@ -5,7 +5,7 @@ import sys
 if sys.version_info < (3, 8):
     sys.exit("❌ Python 3.8 or higher is required")
 
-words = ["law"]
+words = ["law555"]
 tags = ["unit1", "phrasal_verbs"]
 
 
@@ -15,9 +15,8 @@ def get_data(item):
         response = requests.get(
             f"https://api.dictionaryapi.dev/api/v2/entries/en/{item}"
         )
-        if response.status_code != 200:
-            print(response.status_code)
-            return
+
+        response.raise_for_status()
 
         json = response.json()[0]
 
@@ -44,9 +43,16 @@ def get_data(item):
             response += "</div>"
 
         return response
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP error: {http_err}")
+    except requests.exceptions.Timeout:
+        print("Request timed out")
+    except requests.exceptions.ConnectionError:
+        print("Network connection error")
     except Exception as e:
-        print(e)
-        return
+        print(f"Unexpected error: {type(e).__name__}: {e}")
+
+    return
 
 
 file = open(file="anki.csv", mode="w+", newline="")
