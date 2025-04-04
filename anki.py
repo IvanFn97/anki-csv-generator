@@ -5,7 +5,7 @@ import sys
 if sys.version_info < (3, 8):
     sys.exit("❌ Python 3.8 or higher is required")
 
-words = ["law555"]
+words = ["law"]
 tags = ["unit1", "phrasal_verbs"]
 
 
@@ -13,7 +13,7 @@ def get_data(item):
 
     try:
         response = requests.get(
-            f"https://api.dictionaryapi.dev/api/v2/entries/en/{item}"
+            f"https://api.dictionaryapi.dev/api/v2/entries/en/{item}", timeout=5
         )
 
         response.raise_for_status()
