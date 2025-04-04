@@ -1,5 +1,9 @@
 import requests
 import csv
+import sys
+
+if sys.version_info < (3, 8):
+    sys.exit("❌ Python 3.8 or higher is required")
 
 words = ["law"]
 tags = ["unit1", "phrasal_verbs"]
