@@ -1,12 +1,4 @@
 import requests
-import csv
-import sys
-
-if sys.version_info < (3, 8):
-    sys.exit("❌ Python 3.8 or higher is required")
-
-words = ["law"]
-tags = ["unit1", "phrasal_verbs"]
 
 
 def get_data(item):
@@ -53,20 +45,3 @@ def get_data(item):
         print(f"Unexpected error: {type(e).__name__}: {e}")
 
     return
-
-
-file = open(file="anki.csv", mode="w+", newline="")
-
-with file:
-    writer = csv.writer(file, delimiter=";", quotechar="'")
-
-    # writer.writerow(["word", "info", "tags"])
-
-    for word in words:
-        info = get_data(word)
-        if not info:
-            continue
-
-        word_field = f'<div class="entry-front"><div class="word">{word}</div></div>'
-
-        writer.writerow([word_field, info, "::".join(tags)])

@@ -1,0 +1,9 @@
+[project]
+name = "anki-csv-generator"
+authors = [{ name = "ivan", email = "navasfloresivan@gmail.com" }]
+version = "0.1.0"
+requires-python = ">=3.8"
+dependencies = ["requests"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
